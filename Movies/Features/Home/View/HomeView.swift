@@ -40,6 +40,7 @@ struct HomeView: View {
         .task{
             await vm.fetchTrendingMovies()
             await vm.fetchTopRatedMovies()
+            await vm.fetchGenre()
         }
     }
 }

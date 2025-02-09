@@ -7,10 +7,11 @@
 
 import Foundation
 
-
+@MainActor
 class HomeViewModel: ObservableObject {
     @Published var topRatedMovies: [Movie] = []
     @Published var trendingRatedMovies: [Movie] = []
+    @Published var Genre: [Genre] = []
     @Published var erroeMsg = ""
     
     private let movieService = MovieService()
@@ -34,4 +35,16 @@ class HomeViewModel: ObservableObject {
             erroeMsg = "Error: \(error)"
         }
     }
+    
+    func fetchGenre() async {
+        do{
+            let genreApiResponse: GenreResponse = try await movieService.fetchData(api: .init(endpoint:
+                    .genre))
+            Genre = genreApiResponse.genres
+        }catch {
+            erroeMsg = "Error: \(error)"
+        }
+    }
+    
 }
+
