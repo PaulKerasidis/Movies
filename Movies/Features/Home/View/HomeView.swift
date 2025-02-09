@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @State private var searchText: String = ""
     @StateObject private var vm = HomeViewModel()
-    
+    @Namespace var namespace
     var body: some View {
         ScrollView(showsIndicators: false){
             LazyVStack(alignment: .leading, spacing: 20){
@@ -18,6 +18,9 @@ struct HomeView: View {
                     .poppins(.bold, 20)
                 
                 SearchBar(searchText: $searchText)
+                
+                Text(vm.erroeMsg    )
+                    
                 
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack{
@@ -27,8 +30,24 @@ struct HomeView: View {
                     }
                 }
                 
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack{
+                        ForEach(vm.genre){ genre in
+                            GenreCard(genre: genre, nameSpace: namespace, selectedGenre: $vm.selectedGenre)
+                                .onTapGesture {
+                                    withAnimation(.easeOut){
+                                        vm.selectedGenre = genre
+                                        Task{
+                                            await vm.fetchMoviesForSelectedGenre()
+                                        }
+                                    }
+                                }
+                        }
+                    }
+                }
+                
                 LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),],spacing: 20){
-                    ForEach(vm.topRatedMovies){ movie in
+                    ForEach(vm.moviesForSelectedGenre){ movie in
                         MovieCard(movie: movie, type: .grid)
                     }
                 }
@@ -41,6 +60,7 @@ struct HomeView: View {
             await vm.fetchTrendingMovies()
             await vm.fetchTopRatedMovies()
             await vm.fetchGenre()
+            await vm.fetchMoviesForSelectedGenre()
         }
     }
 }

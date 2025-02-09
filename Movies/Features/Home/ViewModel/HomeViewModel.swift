@@ -11,8 +11,10 @@ import Foundation
 class HomeViewModel: ObservableObject {
     @Published var topRatedMovies: [Movie] = []
     @Published var trendingRatedMovies: [Movie] = []
-    @Published var Genre: [Genre] = []
+    @Published var moviesForSelectedGenre: [Movie] = []
+    @Published var genre: [Genre] = []
     @Published var erroeMsg = ""
+    @Published var selectedGenre = Genre(id: 28, name: "Action")
     
     private let movieService = MovieService()
     
@@ -38,9 +40,24 @@ class HomeViewModel: ObservableObject {
     
     func fetchGenre() async {
         do{
-            let genreApiResponse: GenreResponse = try await movieService.fetchData(api: .init(endpoint:
+            let genreApiResponse: GenreResponse = try await movieService.fetchData(api: ApiConstructor(endpoint:
                     .genre))
-            Genre = genreApiResponse.genres
+            genre = genreApiResponse.genres
+            if let genre = genre.first {
+                selectedGenre = genre
+            }
+        }catch {
+            erroeMsg = "Error: \(error)"
+        }
+    }
+    
+    func fetchMoviesForSelectedGenre() async {
+        do{
+            let selectedGenreApi = ApiConstructor(endpoint: .discoverMovies, params: [
+                "with_genres": "\(selectedGenre.id)"
+            ])
+            let response: MovieResponse = try await movieService.fetchData(api: selectedGenreApi)
+            moviesForSelectedGenre = response.results
         }catch {
             erroeMsg = "Error: \(error)"
         }

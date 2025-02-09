@@ -9,12 +9,27 @@ import SwiftUI
 
 struct GenreCard: View {
     let genre: Genre
+    let nameSpace: Namespace.ID
+    @Binding var selectedGenre: Genre
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(genre.name)
+            .poppins(genre.id == selectedGenre.id ? .bold : .medium, 18)
+            .background(
+                ZStack {
+                    if genre.id == selectedGenre.id {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.AppGrayColor1)
+                            .frame(height: 3)
+                            .offset(y: 20)
+                            .matchedGeometryEffect(id: "Genre", in: nameSpace)
+                    }
+                }
+            )
+            .padding()
     }
 }
 
 #Preview {
-    GenreCard()
+    GenreCard(genre: genre, nameSpace: Namespace().wrappedValue, selectedGenre: .constant(genre))
 }

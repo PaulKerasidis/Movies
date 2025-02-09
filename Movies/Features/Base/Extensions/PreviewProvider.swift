@@ -26,3 +26,5 @@ extension Movie {
         voteCount: 29847
     )
 }
+
+let genre = Genre(id: 28, name: "Action")
