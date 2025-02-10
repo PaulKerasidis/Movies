@@ -19,7 +19,7 @@ struct HomeView: View {
                 
                 SearchBar(searchText: $searchText)
                 
-                Text(vm.erroeMsg    )
+                Text(vm.erroeMsg)
                     
                 
                 ScrollView(.horizontal, showsIndicators: false){

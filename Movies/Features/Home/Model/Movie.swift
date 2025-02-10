@@ -24,7 +24,7 @@ struct MovieResponse: Codable {
 }
 
 struct Movie: Codable, Identifiable {
-    let backdropPath: String
+    let backdropPath: String?
     let id: Int      // This property satisfies Identifiable requirement
     let title: String
     let originalTitle: String
