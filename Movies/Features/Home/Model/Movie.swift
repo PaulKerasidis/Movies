@@ -29,7 +29,7 @@ struct Movie: Codable, Identifiable {
     let title: String
     let originalTitle: String
     let overview: String
-    let posterPath: String
+    let posterPath: String?
     let mediaType: String?
     let adult: Bool
     let originalLanguage: String
@@ -60,7 +60,20 @@ struct Movie: Codable, Identifiable {
 }
 extension Movie {
     var imageUrlString: String {
-        Constants.imageBaseUrl + posterPath
+        Constants.imageBaseUrl + posterPath.stringValue
+    }
+    
+    func getImage(for type: MovieImageType)-> String{
+        switch type {
+        case .backdrop:
+            return Constants.imageBaseUrl + (posterPath == nil ? backdropPath.stringValue : posterPath.stringValue)
+        case .poster:
+            return Constants.imageBaseUrl + (backdropPath == nil ? posterPath.stringValue : backdropPath.stringValue)
+        }
+        
     }
 }
 
+enum MovieImageType{
+    case backdrop,poster
+}

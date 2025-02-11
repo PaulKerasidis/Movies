@@ -18,14 +18,15 @@ struct HomeView: View {
                     .poppins(.bold, 20)
                 
                 SearchBar(searchText: $searchText)
-                
-                Text(vm.erroeMsg)
                     
                 
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack{
                         ForEach(vm.trendingRatedMovies){ movie in
                             MovieCard(movie: movie)
+                                .onTapGesture {
+                                    vm.selectedMovie = movie
+                                }
                         }
                     }
                 }
@@ -56,6 +57,9 @@ struct HomeView: View {
         .preferredColorScheme(.dark)
         .padding()
         .background(Color.AppBackgroundColor)
+        .fullScreenCover(item: $vm.selectedMovie) {movie in
+            DetalView(movie: movie)
+        }
         .task{
             await vm.fetchTrendingMovies()
             await vm.fetchTopRatedMovies()

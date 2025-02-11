@@ -15,6 +15,7 @@ class HomeViewModel: ObservableObject {
     @Published var genre: [Genre] = []
     @Published var erroeMsg = ""
     @Published var selectedGenre = Genre(id: 28, name: "Action")
+    @Published var selectedMovie: Movie? = nil
     
     private let movieService = MovieService()
     
@@ -64,4 +65,3 @@ class HomeViewModel: ObservableObject {
     }
     
 }
-
