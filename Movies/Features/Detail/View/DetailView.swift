@@ -15,11 +15,19 @@ struct DetailView: View {
         _vm = StateObject(wrappedValue: DetailViewModel(movie: movie))
     }
     
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    var body: some View{
+        VStack(alignment: .leading) {
+            ZStack(alignment: .leading) {
+                CostumeImageView(itemWidth: screenWidth, itemHeight: posterImageHeight, movie: vm.movie)
+            }
+        }
+    }
+    
+    var posterImageHeight: CGFloat {
+        screenHeight * 0.35
     }
 }
 
 #Preview {
-    DetailView(movie: dev.movie)
+    DetailView(movie: .moviePreview )
 }

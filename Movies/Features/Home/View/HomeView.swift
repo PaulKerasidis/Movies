@@ -58,7 +58,7 @@ struct HomeView: View {
         .padding()
         .background(Color.AppBackgroundColor)
         .fullScreenCover(item: $vm.selectedMovie) {movie in
-            DetalView(movie: movie)
+            DetailView(movie: movie)
         }
         .task{
             await vm.fetchTrendingMovies()
