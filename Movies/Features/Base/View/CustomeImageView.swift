@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct CostumeImageView: View {
+struct CustomeImageView: View {
     let itemWidth: CGFloat
     let itemHeight: CGFloat
     let movie: Movie
-    let imageType: MovieImageType = .poster
+    var imageType: MovieImageType = .poster
     
     var body: some View {
         AsyncImage(url: URL(string: movie.getImage(for: imageType))) {image in
@@ -34,5 +34,5 @@ struct CostumeImageView: View {
 }
 
 #Preview {
-    CostumeImageView(itemWidth: 150, itemHeight: 150, movie: .moviePreview)
+    CustomeImageView(itemWidth: 150, itemHeight: 150, movie: .moviePreview)
 }

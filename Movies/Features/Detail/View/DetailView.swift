@@ -18,13 +18,53 @@ struct DetailView: View {
     var body: some View{
         VStack(alignment: .leading) {
             ZStack(alignment: .leading) {
-                CostumeImageView(itemWidth: screenWidth, itemHeight: posterImageHeight, movie: vm.movie)
+                ZStack(alignment: .top) {
+                    CustomeImageView(itemWidth: screenWidth, itemHeight: posterImageHeight, movie: vm.movie)
+                    
+                    HStack{
+                        Image.BackIcon
+                            .onTapGesture {
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        Spacer()
+                        Text("Details")
+                        Spacer()
+                        Image.BookmarkIcon
+                    }
+                    .padding()
+                    .background(Color.AppBackgroundColor)
+                }
+                
+                HStack{
+                    CustomeImageView(itemWidth: backDropImageSize, itemHeight: backDropImageSize, movie: vm.movie, imageType: .backdrop)
+                    
+                    Text(vm.movie.title)
+                        .minimumScaleFactor(0.5)
+                        .padding(.top, tittleOffset)
+                }
+                .padding()
+                .offset(y: backDropImageOffset)
             }
+            Spacer()
         }
+        .preferredColorScheme(.dark)
+        .background(Color.appBackground)
     }
     
     var posterImageHeight: CGFloat {
         screenHeight * 0.35
+    }
+    
+    var backDropImageSize: CGFloat {
+        screenHeight * 0.22
+    }
+    
+    var backDropImageOffset: CGFloat {
+        screenHeight * 0.15
+    }
+    
+    var tittleOffset: CGFloat {
+        screenHeight * 0.12
     }
 }
 

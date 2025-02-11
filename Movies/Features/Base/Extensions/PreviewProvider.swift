@@ -14,7 +14,7 @@ extension Movie {
         title: "The Shawshank Redemption",
         originalTitle: "Inception",
         overview: "A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
-        posterPath: "/path/to/poster.jpg",
+        posterPath: "/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
         mediaType: "movie",  // Added the missing mediaType
         adult: false,
         originalLanguage: "en",
