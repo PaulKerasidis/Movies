@@ -35,7 +35,7 @@ struct Movie: Codable, Identifiable {
     let originalLanguage: String
     let genreIds: [Int]
     let popularity: Double
-    let releaseDate: String
+    let releaseDate: String?
     let video: Bool
     let voteAverage: Double
     let voteCount: Int
