@@ -57,6 +57,14 @@ struct DetailView: View {
                                 }
                             }
                     }
+                    
+                    switch vm.selectedSection {
+                    case .about:
+                        Text(vm.movie.overview)
+                    case .review:
+                        Text("Review")
+                    }
+                    
                 }
                 
                 Spacer()
@@ -66,6 +74,9 @@ struct DetailView: View {
         }
         .preferredColorScheme(.dark)
         .background(Color.appBackground)
+        .task {
+            await vm.fetchReviews()
+        }
     }
     
     var posterImageHeight: CGFloat {
