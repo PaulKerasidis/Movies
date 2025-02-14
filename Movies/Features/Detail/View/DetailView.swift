@@ -47,8 +47,7 @@ struct DetailView: View {
                 }
                 .foregroundColor(.AppGrayColor2)
                 .frame(maxWidth: .infinity)
-                
-                Text(vm.errorMsg)
+            
                 
                 HStack {
                     ForEach(vm.sections, id: \.self){ section in
