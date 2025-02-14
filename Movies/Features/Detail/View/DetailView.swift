@@ -48,6 +48,8 @@ struct DetailView: View {
                 .foregroundColor(.AppGrayColor2)
                 .frame(maxWidth: .infinity)
                 
+                Text(vm.errorMsg)
+                
                 HStack {
                     ForEach(vm.sections, id: \.self){ section in
                         DetailSectionCard(section: section, namespace: namespace, selectedSection: $vm.selectedSection)
@@ -57,15 +59,20 @@ struct DetailView: View {
                                 }
                             }
                     }
+                }
                     
                     switch vm.selectedSection {
                     case .about:
                         Text(vm.movie.overview)
                     case .review:
-                        Text("Review")
+                        ScrollView{
+                            ForEach(vm.reviews){ review in
+                                ReviewCard(review: review)
+                            }
+                        }
                     }
                     
-                }
+                
                 
                 Spacer()
             }

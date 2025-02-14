@@ -14,6 +14,8 @@ class DetailViewModel: ObservableObject {
     @Published var selectedSection: DetailViewSection = .about
     @Published var reviews: [Review] = []
     
+    @Published var errorMsg = ""
+    
     private let movieService = MovieService()
     
     init(movie : Movie) {
@@ -26,6 +28,7 @@ class DetailViewModel: ObservableObject {
             reviews = response.results
         } catch {
             print("Error: \(error)")
+            errorMsg = "Error \(error)"
         }
     }
     

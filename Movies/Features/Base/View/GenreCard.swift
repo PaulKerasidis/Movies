@@ -31,5 +31,5 @@ struct GenreCard: View {
 }
 
 #Preview {
-    GenreCard(genre: genre, nameSpace: Namespace().wrappedValue, selectedGenre: .constant(genre))
+    GenreCard(genre: genrePreview, nameSpace: Namespace().wrappedValue, selectedGenre: .constant(genrePreview))
 }

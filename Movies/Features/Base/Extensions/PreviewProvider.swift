@@ -27,4 +27,6 @@ extension Movie {
     )
 }
 
-let genre = Genre(id: 28, name: "Action")
+let genrePreview = Genre(id: 28, name: "Action")
+
+let reviewPreview = Review(author: "Test Author", authorDetails: nil, content: "Text Content", createdAt: "2025", id: "Test ID", updatedAt: "Test", url: "Test")
